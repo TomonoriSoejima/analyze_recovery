@@ -1,12 +1,12 @@
 url="localhost:9200/recovery/_search"
-curl -u elastic:changeme  -s --location --request GET $url \
+curl  -s --location --request GET $url \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "size": 0, 
   "aggs": {
     "host_name": {
       "terms": {
-        "field": "name.keyword",
+        "field": "target_name.keyword",
         "size": 20
       },
       "aggs": {
@@ -18,4 +18,4 @@ curl -u elastic:changeme  -s --location --request GET $url \
       }
     }
   }
-}' | jq .
+}' | jq . > result.json
